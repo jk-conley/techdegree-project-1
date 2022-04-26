@@ -35,7 +35,7 @@ def start_game():
     high_score = 10
     print("***Welcome to the Number Guessing Game!***")
     print("Instructions: A Random number is selected from the range 1-10.")
-	print("You enter a number within that range to guess the number selected. Try your best to beat the high score!")
+	print("You guess a number within that range and try your best to guess the random number. Try your best to beat the high score!")
 	print("*****************************************************************")
 	print(f"The current record breaker for number of guesses is {high_score}")
 	print("*****************************************************************")
@@ -67,7 +67,7 @@ def start_game():
 				break
 			else:
 				break
-            
+
 
 
 # Kick off the program by calling the start_game function.
