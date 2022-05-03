@@ -41,10 +41,19 @@ def intro_message(score):
 def get_random_num(num1, num2):
     return random.randrange(num1, num2)
 
-# Ended up writing this code twice so to follow DRY made it into a definition
-def initialize_guess():
-    return int(input("Please guess a number between 1-10: "))
+# Validates guess and handles exceptions
+def validate_guess(input_msg):
+    user_guess = 0
+    while True:
+        try:
+            user_guess = int(input_msg)
+            break
+        except ValueError:
+            print("Not a valid value, please enter a number between 1-10")
+            continue
+    return user_guess
 
+# Starts and runs the game
 def start_game():
 
     # Initialize high score for start game
@@ -64,11 +73,11 @@ def start_game():
     count = 0
 
     # Get first guess
-    guess = initialize_guess()
+    guess = validate_guess(input("Please guess a number between 1-10: "))
 
     # While loop to continously ask player for guesses until they get it right
     while True:
-        # If the player guesses too high
+        # If the player guesses too high and check if guess is within range
         if guess > random_number_selected:
             guess = int(input("The number is lower than your guess, please try again: "))
             count += 1
