@@ -42,16 +42,8 @@ def get_random_num(num1, num2):
     return random.randrange(num1, num2)
 
 # Validates guess and handles exceptions
-def validate_guess(input_msg):
-    user_guess = 0
-    while True:
-        try:
-            user_guess = int(input_msg)
-            break
-        except ValueError:
-            print("Not a valid value, please enter a number between 1-10")
-            continue
-    return user_guess
+def initialize_guess():
+    return int(input("Please guess a number between 1-10: "))
 
 # Starts and runs the game
 def start_game():
@@ -73,7 +65,12 @@ def start_game():
     count = 0
 
     # Get first guess
-    guess = validate_guess(input("Please guess a number between 1-10: "))
+    while True:
+        try:
+            guess = initialize_guess()
+            break
+        except ValueError:
+            print("Not a valid value, please use a number between 1-10")
 
     # While loop to continously ask player for guesses until they get it right
     while True:
