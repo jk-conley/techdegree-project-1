@@ -42,14 +42,20 @@ def get_random_num(num1, num2):
     return random.randrange(num1, num2)
 
 # Validates guess and handles exceptions
-def initialize_guess():
+def initialize_guess(msg_to_user):
     while True:
         try:
-            ini_guess = int(input("Please guess a number between 1-10: "))
+            ini_guess = int(input(msg_to_user))
+            validate_number_range(ini_guess)
             break
         except ValueError:
             print("Not a valid value, please use a number between 1-10")
     return ini_guess
+
+# Checks Number Range and Validates
+def validate_number_range(user_guess):
+    if user_guess < 1 or user_guess > 10:
+        raise ValueError
 
 # Starts and runs the game
 def start_game():
@@ -71,18 +77,18 @@ def start_game():
     count = 0
 
     # Get first guess
-    guess = initialize_guess()
+    guess = initialize_guess("Please guess a number between 1-10: ")
 
     # While loop to continously ask player for guesses until they get it right
     while True:
         # If the player guesses too high and check if guess is within range
         if guess > random_number_selected:
-            guess = int(input("The number is lower than your guess, please try again: "))
+            guess = initialize_guess("The number is lower than your guess, please try again: ")
             count += 1
             continue
         # If the player guesses too low
         elif guess < random_number_selected:
-            guess = int(input("The number is higher than your guess, please try again: "))
+            guess = initialize_guess("The number is higher than your guess, please try again: ")
             count += 1
             continue
         # Player guesses right
@@ -96,25 +102,29 @@ def start_game():
                 print(f"You set a new record at {high_score} guesses, Awesome job!")
 
             # Check if the player wants to play another game
-            another_game = input("Do you want to play another game? (yes/no) ")
-            if another_game.lower() == "yes":
-                # Set new random number and check it does not repeat from last game
-                new_random_num = get_random_num(1, 10)
-                while True:
-                    if new_random_num == random_number_selected:
-                        new_random_num = get_random_num(1, 10)
-                        continue
-                    else:
-                        random_number_selected = new_random_num
-                        break
-                # Get their first guess to start another game and reset count
-                count = 0
-                print(f"The current record to beat is {high_score}")
-                guess = initialize_guess()
-                continue
-            elif another_game.lower() == "no":
-                print("Thank you for playing, Goodbye!")
-                break
+            while True:
+                another_game = input("Do you want to play another game? (yes/no) ")
+                if another_game.lower() == "yes":
+                    # Set new random number and check it does not repeat from last game
+                    new_random_num = get_random_num(1, 10)
+                    while True:
+                        if new_random_num == random_number_selected:
+                            new_random_num = get_random_num(1, 10)
+                            continue
+                        else:
+                            random_number_selected = new_random_num
+                            break
+                    # Get their first guess to start another game and reset count
+                    count = 0
+                    print(f"The current record to beat is {high_score}")
+                    guess = initialize_guess("Please guess a number between 1-10: ")
+                    continue
+                elif another_game.lower() == "no":
+                    print("Thank you for playing, Goodbye!")
+                    break
+                else:
+                    print("That is not valid, please use yes or no")
+                    continue
 
 
 
