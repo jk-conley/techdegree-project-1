@@ -48,7 +48,7 @@ def start_game():
     random_number_selected = get_random_num(1, 10)
 
     # Here for testing purposes
-    print(random_number_selected)
+    #print(random_number_selected)
 
     # Initialize count of guesses
     count = 0
