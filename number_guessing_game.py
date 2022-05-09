@@ -79,29 +79,30 @@ def start_game():
                 print(f"You set a new record at {high_score} guesses, Awesome job!")
 
             # Check if the player wants to play another game
-            while True:
-                another_game = input("Do you want to play another game? (yes/no) ")
-                if another_game.lower() == "yes":
-                    # Set new random number and check it does not repeat from last game
-                    new_random_num = get_random_num(1, 10)
-                    while True:
-                        if new_random_num == random_number_selected:
-                            new_random_num = get_random_num(1, 10)
-                            continue
-                        else:
-                            random_number_selected = new_random_num
-                            break
-                    # Get their first guess to start another game and reset count
-                    count = 0
-                    print(f"The current record to beat is {high_score}")
-                    guess = initialize_guess("Please guess a number between 1-10: ")
-                    continue
-                elif another_game.lower() == "no":
-                    print("Thank you for playing, Goodbye!")
-                    break
-                else:
-                    print("That is not valid, please use yes or no")
-                    continue
+
+            another_game = input("Do you want to play another game? (yes/no) ")
+            if another_game.lower() == "yes":
+                # Set new random number and check it does not repeat from last game
+                new_random_num = get_random_num(1, 10)
+                while True:
+                    if new_random_num == random_number_selected:
+                        new_random_num = get_random_num(1, 10)
+                        continue
+                    else:
+                        random_number_selected = new_random_num
+                        break
+                # Get their first guess to start another game and reset count
+                count = 0
+                print(f"The current record to beat is {high_score}")
+                guess = initialize_guess("Please guess a number between 1-10: ")
+                continue
+            elif another_game.lower() == "no":
+                print("Thank you for playing, Goodbye!")
+                break
+            else:
+                print("That is not valid, please use yes or no")
+                continue
+
 
 
 
