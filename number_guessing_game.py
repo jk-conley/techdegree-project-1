@@ -58,7 +58,7 @@ def start_game():
 
     # While loop to continously ask player for guesses until they get it right
     while True:
-        # If the player guesses too high and check if guess is within range
+        # If the player guesses too high
         if guess > random_number_selected:
             guess = initialize_guess("The number is lower than your guess, please try again: ")
             count += 1
@@ -104,6 +104,7 @@ def start_game():
                 print(f"The current record to beat is {high_score}")
                 guess = initialize_guess("Please guess a number between 1-10: ")
                 continue
+            # Sends a goodbye message and ends game
             elif another_game.lower() == "no":
                 print("Thank you for playing, Goodbye!")
                 break
