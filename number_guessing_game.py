@@ -69,7 +69,7 @@ def start_game():
             count += 1
             continue
         # Player guesses right
-        elif guess == random_number_selected:
+        else:
             count += 1
             print(f"Congratulations! You guessed the correct number in {count} guesses!")
 
@@ -78,9 +78,17 @@ def start_game():
                 high_score = count
                 print(f"You set a new record at {high_score} guesses, Awesome job!")
 
-            # Check if the player wants to play another game
-
+            # Check if the player wants to play another game and validate they use yes or no
             another_game = input("Do you want to play another game? (yes/no) ")
+            #Validate if yes or no was used
+            while True:
+                if another_game.lower() == 'yes' or another_game.lower() == 'no':
+                    break
+                else:
+                    print("That is not a valid answer, please use yes or no to continue")
+                    another_game = input("Do you want to play another game? (yes/no) ")
+                    continue
+            # Once Validated, if yes set a new game, if no give msg and end game
             if another_game.lower() == "yes":
                 # Set new random number and check it does not repeat from last game
                 new_random_num = get_random_num(1, 10)
@@ -99,9 +107,7 @@ def start_game():
             elif another_game.lower() == "no":
                 print("Thank you for playing, Goodbye!")
                 break
-            else:
-                print("That is not valid, please use yes or no")
-                continue
+
 
 
 
